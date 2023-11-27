@@ -1,0 +1,24 @@
+﻿<Page x:Class="Diary.Records"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:Diary.ViewModels"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="Records"
+      Background="#DBECF4">
+    <Page.DataContext>
+        <local:RecordsViewModel/>
+    </Page.DataContext>
+    <Grid Margin="308,0,0,0">
+        <ListBox  ItemsSource="{Binding Records, UpdateSourceTrigger=PropertyChanged}" Height="450"/>
+        <TextBlock TextWrapping="Wrap" Text="Diary Explorer" Margin="-273,39,603,377" FontSize="18" FontWeight="Bold"/>
+        <TextBlock TextWrapping="Wrap" Text="Here is the list of all your records, you can see all of them, or each category separately" Margin="-273,88,565,295" FontSize="14" Width="200"/>
+        <Button Command="{Binding ShowAll}" Content="Show All" HorizontalAlignment="Left" Margin="-273,177,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Command="{Binding ShowReminders}" Content="Show Reminders Only" HorizontalAlignment="Left" Margin="-273,225,0,0" VerticalAlignment="Top" Width="130" />
+        <Button Command="{Binding ShowTaskLists}" Content="Show Task Lists Only" HorizontalAlignment="Left" Margin="-273,271,0,0" VerticalAlignment="Top" Width="122"/>
+        <Button Command="{Binding ShowTextRecords}" Content="Show Text Records Only" HorizontalAlignment="Left" Margin="-273,317,0,0" VerticalAlignment="Top" Width="122"/>
+
+    </Grid>
+</Page>
