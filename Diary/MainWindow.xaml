@@ -3,14 +3,83 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Diary"
+        xmlns:local="clr-namespace:Diary.ViewModels"
+        xmlns:v="clr-namespace:Diary.ViewModels.ValidationRules"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800" ResizeMode="NoResize" SizeToContent="WidthAndHeight">
-    <DockPanel>
-        <Menu DockPanel.Dock="Top" Style="{StaticResource TopMenuStyle}">
-            <MenuItem Header="_Records"></MenuItem>
-            <MenuItem Header="_Diary Management"></MenuItem>
-        </Menu>
-        <Frame Name="MainFrame" Source="Home.xaml" Style="{StaticResource MinimalFrameStyle}"/>
-    </DockPanel>
+        Title="Task 11" Height="592" Width="1012" ResizeMode="NoResize" SizeToContent="WidthAndHeight"
+        Background="#ABA">
+    <Window.DataContext>
+        <local:RecordsViewModel/>
+    </Window.DataContext>
+    <Grid>
+        <ListBox  ItemsSource="{Binding Records, UpdateSourceTrigger=PropertyChanged}" Margin="542,0,0,0" Height="576" Width="470"/>
+        <TextBlock TextWrapping="Wrap" Text="Diary Explorer" Margin="28,23,845,516" FontSize="18" FontWeight="Bold"/>
+        <Button Command="{Binding ShowAll}" Content="Show All" HorizontalAlignment="Left" Margin="189,27,0,0" VerticalAlignment="Top" Width="96"/>
+        <Button Command="{Binding ShowReminders}" Content="Show Reminders Only" HorizontalAlignment="Left" Margin="324,63,0,0" VerticalAlignment="Top" Width="130" />
+        <Button Command="{Binding ShowTextRecords}" Content="Show Text Records Only" HorizontalAlignment="Left" Margin="189,63,0,0" VerticalAlignment="Top" Width="122"/>
+        <ComboBox HorizontalAlignment="Left" Margin="22,163,0,0" VerticalAlignment="Top" Width="99" ItemsSource="{Binding RecordTypeOptions}" SelectedItem="{Binding CurrentRecordType}"/>
+        <Label Content="Choose type of record" HorizontalAlignment="Left" Margin="22,132,0,0" VerticalAlignment="Top" Width="145"/>
+        <TextBox HorizontalAlignment="Left" Margin="22,224,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Height="20" Name="Title">
+            <TextBox.Text>
+                <Binding Path="Title" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:StringContentValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Title of your record" HorizontalAlignment="Left" Margin="22,190,0,0" VerticalAlignment="Top" Width="119"/>
+        <TextBox IsEnabled="{Binding IsTextRecordProcessed, UpdateSourceTrigger=PropertyChanged}"
+         HorizontalAlignment="Left" Margin="182,158,0,0" VerticalAlignment="Top"
+         Width="170" Height="30" Name="TextContent">
+            <TextBox.Text>
+                <Binding Path="TextContent" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:StringContentValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Text Content" HorizontalAlignment="Left" Margin="182,132,0,0" VerticalAlignment="Top" Width="86"/>
+        <Label Content="Reminder Date" HorizontalAlignment="Left" Margin="182,190,0,0" VerticalAlignment="Top" Width="103"/>
+        <Button IsEnabled="false" Name="CreateBtn" Command="{Binding Create, UpdateSourceTrigger=PropertyChanged}" Content="Create" HorizontalAlignment="Left" Margin="338,220,0,0" VerticalAlignment="Top" Width="67" Height="26" RenderTransformOrigin="0.463,-0.231"/>
+        <DatePicker Name="Date" SelectedDate="{Binding ReminderDate, Mode=TwoWay}" IsEnabled="{Binding IsReminderProcessed, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="182,221,0,0" VerticalAlignment="Top" Width="103"/>
+        <TextBlock TextWrapping="Wrap" Text="Create" Margin="28,93,894,449" FontSize="18" FontWeight="Bold"/>
+        <TextBlock TextWrapping="Wrap" Text="Modification" Margin="22,273,877,277" FontSize="18" FontWeight="Bold"/>
+        <TextBox HorizontalAlignment="Left" Margin="29,382,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="99" Height="20" Name="TitleMod">
+            <TextBox.Text>
+                <Binding Path="TitleMod" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:StringContentValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Title of your record" HorizontalAlignment="Left" Margin="29,356,0,0" VerticalAlignment="Top" Width="119"/>
+        <TextBox IsEnabled="{Binding IsTextRecordProcessedMod, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="266,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="191" Height="30" Name="TextContentMod">
+            <TextBox.Text>
+                <Binding Path="TextContentMod" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:StringContentValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Text Content" HorizontalAlignment="Left" Margin="266,286,0,0" VerticalAlignment="Top" Width="86"/>
+        <Label Content="Reminder Date" HorizontalAlignment="Left" Margin="182,356,0,0" VerticalAlignment="Top" Width="103"/>
+        <DatePicker SelectedDate="{Binding ReminderDateMod, Mode=TwoWay}" IsEnabled="{Binding IsReminderProcessedMod, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="182,379,0,0" VerticalAlignment="Top" Width="103"/>
+        <TextBox HorizontalAlignment="Left" Margin="72,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="20" Name="Id">
+            <TextBox.Text>
+                <Binding Path="Id" UpdateSourceTrigger="PropertyChanged">
+                    <Binding.ValidationRules>
+                        <v:PositiveIntValidation/>
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox.Text>
+        </TextBox>
+        <Label Content="Id" HorizontalAlignment="Left" Margin="28,305,0,0" VerticalAlignment="Top"/>
+        <Button IsEnabled="false"  Name="DeleteBtn" Command="{Binding Delete}" Content="Delete" HorizontalAlignment="Left" Margin="422,374,0,0" VerticalAlignment="Top" Width="70" Height="26"/>
+        <Button IsEnabled="false" Name="UpdateBtn" Command="{Binding Update}" Content="Update" HorizontalAlignment="Left" Margin="338,374,0,0" VerticalAlignment="Top" Width="67" Height="26" />
+        <Button Command="{Binding Find}" Content="Find" HorizontalAlignment="Left" Margin="158,305,0,0" VerticalAlignment="Top" Width="67" Height="26" RenderTransformOrigin="0.463,-0.231"/>
+    </Grid>
 </Window>

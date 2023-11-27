@@ -3,11 +3,11 @@ using System.Text;
 
 namespace Diary.Models
 {
-    public class TextRecord(int id, string title, string textContent, DateTime creationDate) : Record(id, title, creationDate)
+    public class TextRecord(int id, string title, string textContent) : Record(id, title)
     {
         public string TextContent { get; set; } = textContent;
 
-        private static readonly char[] separator = new[] { ' ', '\t', '\r', '\n' };
+        private static readonly char[] separator = [' ', '\t', '\r', '\n'];
 
         private static int CountWords(string text)
         {
@@ -32,7 +32,7 @@ namespace Diary.Models
         {
             StringBuilder sb = new();
             sb.AppendLine($"Text Note - {Title}");
-            sb.AppendLine($"Reminder Date: {TextContent}");
+            sb.AppendLine($"Content: {TextContent}");
             sb.AppendLine($"Created on: {CreationDate:yyyy-MM-dd HH:mm:ss}");
             return sb.ToString();
         }
