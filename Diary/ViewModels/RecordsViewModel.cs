@@ -7,6 +7,7 @@ using Diary.ViewModels.Abstract;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Input;
 
 namespace Diary.ViewModels
@@ -256,7 +257,15 @@ namespace Diary.ViewModels
                     {
                         return;
                     }
-                    _diaryService.TryUpdateRecord(updatedRecord);
+
+                    if (_diaryService.TryUpdateRecord(updatedRecord))
+                    {
+                        MessageBox.Show("Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed");
+                    };
                 },
                 canExecuteFunc => true);
 
@@ -278,19 +287,31 @@ namespace Diary.ViewModels
                         IsReminderProcessedMod = true;
                         IsTextRecordProcessedMod = false;
                     }
+                    else
+                    {
+                        MessageBox.Show("Not Found");
+                    }
                 },
                 canExecuteFunc => true);
 
             Delete = new RelayCommand(
                 executeAction =>
                 {
-                    Id = 0;
-                    TitleMod = string.Empty; 
+                    if (_diaryService.TryRemoveRecord(Id))
+                    {
+                        MessageBox.Show("Success");
+                    }
+                    else
+                    {
+                        MessageBox.Show("Failed");
+                    };
+
+                    TitleMod = string.Empty;
                     TextContentMod = string.Empty;
                     ReminderDateMod = new DateTime();
                     IsReminderProcessedMod = false;
                     IsTextRecordProcessedMod = false;
-                    _diaryService.TryRemoveRecord(Id);
+                    Id = 0;
                 },
                 canExecuteFunc => true);
 
