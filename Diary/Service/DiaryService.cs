@@ -24,10 +24,10 @@ namespace Diary.Service
 
         private ObservableCollection<Record> _records =
         [
-            new Reminder(1, "Meeting Reminder 1", DateTime.Now.AddDays(1)),
-            new Reminder(2, "Meeting Reminder 2", DateTime.Now.AddDays(2)),
-            new TextRecord(5, "Note 1", "This is a sample text note 1."),
-            new TextRecord(6, "Note 2", "This is a sample text note 2."),
+            //new Reminder(1, "Meeting Reminder 1", DateTime.Now.AddDays(1)),
+            //new Reminder(2, "Meeting Reminder 2", DateTime.Now.AddDays(2)),
+            //new TextRecord(5, "Note 1", "This is a sample text note 1."),
+            //new TextRecord(6, "Note 2", "This is a sample text note 2."),
         ];
 
         public ObservableCollection<Record> Reminders => GetRecordsOfType<Reminder>();

@@ -34,7 +34,7 @@ namespace Diary.Models
         public override string ToString()
         {
             StringBuilder sb = new();
-            sb.AppendLine($"Reminder - {Title}");
+            sb.AppendLine($"Reminder - {Title}, id - {Id}");
             sb.AppendLine($"Reminder Date: {ReminderDate:yyyy-MM-dd HH:mm:ss}");
             sb.AppendLine($"Created on: {CreationDate:yyyy-MM-dd HH:mm:ss}");
             return sb.ToString();
