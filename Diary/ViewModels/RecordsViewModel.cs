@@ -234,6 +234,8 @@ namespace Diary.ViewModels
 
         public ICommand Update { get; }
 
+        public ICommand Download { get; }
+
         public RecordsViewModel()
         {
             _records = _diaryService.Records;
@@ -322,9 +324,15 @@ namespace Diary.ViewModels
                 },
                 canExecuteFunc => true);
 
+            Download = new RelayCommand(
+                executeAction: async (param) => {
+                    await DownloadRecords();
+                },
+                canExecuteFunc => true);
+
         }
 
-        public void DownloadRecords()
+        public async Task DownloadRecords()
         {
             DriveInfo dDrive = new("D:");
             string filePath = Path.Combine(dDrive.RootDirectory.FullName, "diary.txt");
@@ -334,6 +342,7 @@ namespace Diary.ViewModels
             {
                 sb.AppendLine(record.DisplayInfo());
             }
+            await writer.WriteAsync(sb.ToString());
         }
 
     }

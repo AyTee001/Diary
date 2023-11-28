@@ -20,7 +20,7 @@ namespace Diary.Models
             StringBuilder sb = new();
             sb.AppendLine($"Text Note - {Title}");
             sb.AppendLine($"Text Content: {TextContent}");
-            sb.AppendLine($"Created on: {CreationDate:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine($"Updated on: {LastUpdated:yyyy-MM-dd HH:mm:ss}");
 
             int wordCount = CountWords(TextContent);
             sb.AppendLine($"Word Count: {wordCount}");
@@ -33,7 +33,7 @@ namespace Diary.Models
             StringBuilder sb = new();
             sb.AppendLine($"Text Note - {Title}, id - {Id}");
             sb.AppendLine($"Content: {TextContent}");
-            sb.AppendLine($"Created on: {CreationDate:yyyy-MM-dd HH:mm:ss}");
+            sb.AppendLine($"Updated on: {LastUpdated:yyyy-MM-dd HH:mm:ss}");
             return sb.ToString();
         }
     }

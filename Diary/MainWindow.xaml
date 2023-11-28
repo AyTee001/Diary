@@ -68,7 +68,7 @@
         <Label Content="Text Content" HorizontalAlignment="Left" Margin="266,286,0,0" VerticalAlignment="Top" Width="86"/>
         <Label Content="Reminder Date" HorizontalAlignment="Left" Margin="182,356,0,0" VerticalAlignment="Top" Width="103"/>
         <DatePicker SelectedDate="{Binding ReminderDateMod, Mode=TwoWay}" IsEnabled="{Binding IsReminderProcessedMod, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Left" Margin="182,379,0,0" VerticalAlignment="Top" Width="103"/>
-        <TextBox HorizontalAlignment="Left" Margin="72,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="20" Name="Id">
+        <TextBox Name="IdBox" HorizontalAlignment="Left" Margin="72,310,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Height="20">
             <TextBox.Text>
                 <Binding Path="Id" UpdateSourceTrigger="PropertyChanged">
                     <Binding.ValidationRules>
@@ -80,6 +80,7 @@
         <Label Content="Id" HorizontalAlignment="Left" Margin="28,305,0,0" VerticalAlignment="Top"/>
         <Button IsEnabled="false"  Name="DeleteBtn" Command="{Binding Delete}" Content="Delete" HorizontalAlignment="Left" Margin="422,374,0,0" VerticalAlignment="Top" Width="70" Height="26"/>
         <Button IsEnabled="false" Name="UpdateBtn" Command="{Binding Update}" Content="Update" HorizontalAlignment="Left" Margin="338,374,0,0" VerticalAlignment="Top" Width="67" Height="26" />
-        <Button Command="{Binding Find}" Content="Find" HorizontalAlignment="Left" Margin="158,305,0,0" VerticalAlignment="Top" Width="67" Height="26" RenderTransformOrigin="0.463,-0.231"/>
+        <Button IsEnabled="False" Name="FindBtn" Command="{Binding Find}" Content="Find" HorizontalAlignment="Left" Margin="158,305,0,0" VerticalAlignment="Top" Width="67" Height="26" RenderTransformOrigin="0.463,-0.231"/>
+        <Button Command="{Binding Download}" Content="Download Currents" HorizontalAlignment="Left" Margin="29,426,0,0" VerticalAlignment="Top" Height="26" Width="106"/>
     </Grid>
 </Window>
